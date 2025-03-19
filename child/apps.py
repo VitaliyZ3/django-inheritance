@@ -7,4 +7,4 @@ class ChildConfig(AppConfig):
 
     def ready(self):
         from core.patcher import extend_models
-        extend_models()
+        extend_models(self.name)
