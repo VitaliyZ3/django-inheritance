@@ -20,17 +20,17 @@ This pipeline dynamically extends Django models across apps by injecting fields 
 - parent (base application for all cliens)
 - child (optional application dedicated to the client for inheritance models specified in parent class)
 
-### Implemented parent model [**parent/models.py**]
+### Parent model [**parent/models.py**]
 ```python
 class Invoice(models.Model):
     number = models.CharField("Invoice Number", max_length=64)
     pay_amount = models.IntegerField()
     status = models.ForeignKey(InvoiceStatus, verbose_name="Status Name", on_delete=models.SET_NULL, null=True)
 ```
-### Implemented child model [**child/models.py**]
+### Child model [**child/models.py**]
 ```python
 class InvoiceExtended(models.Model):
-    extends = "Invoice" # Mandatory to specify model from @parent
+    extends = "Invoice" # Mandatory to specify model name from @parent
 
     invoice_name = models.CharField("Name", max_length=64, null=True)
     
@@ -39,7 +39,7 @@ class InvoiceExtended(models.Model):
         abstract = True
 ```
 
-### Overload methid in [**child/apps.py**]
+### Overload method in [**child/apps.py**]
 ```python
 class ChildConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
