@@ -10,8 +10,12 @@ class InvoiceStatus(models.Model):
 
 class Invoice(models.Model):
     number = models.CharField("Invoice Number", max_length=64)
-    oay_amount = models.IntegerField()
+    pay_amount = models.IntegerField()
     status = models.ForeignKey(InvoiceStatus, verbose_name="Status Name", on_delete=models.SET_NULL, null=True)
 
     class Meta:
         verbose_name = "Invoice"
+        abstract = False
+
+    def __str__(self) -> str:
+        return self.number
